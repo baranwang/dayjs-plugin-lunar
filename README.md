@@ -1,5 +1,9 @@
 # Dayjs Plugin Lunar
 
+[![NPM Version](https://img.shields.io/npm/v/dayjs-plugin-lunar)](https://npmjs.com/package/dayjs-plugin-lunar)
+[![NPM Downloads](https://img.shields.io/npm/dm/dayjs-plugin-lunar)](https://npmcharts.com/compare/dayjs-plugin-lunar?minimal=true)
+![NPM License](https://img.shields.io/npm/l/dayjs-plugin-lunar)
+
 `dayjs-plugin-lunar` 是一个基于 [Day.js](https://github.com/iamkun/dayjs) 的扩展插件，用于方便地处理和转换农历时间。它依赖 [`tyme4ts`](https://github.com/6tail/tyme4ts) 作为底层时间计算库。
 
 
@@ -42,8 +46,8 @@ dayjs.lunar(2025, 1, 1).format('YYYY-MM-DD') // 2025-01-29
 
 ### 自定义配置
 
-默认情况下，`dayjs-plugin-lunar` 将农历的 `冬月` 和 `腊月` 表述为 `十一月` 和 `十二月`。如果希望遵循传统命名，可以设置插件配置 traditional 为 true（默认值）。
-若需显示 tyme4ts 的原始表述，可将 traditional 设置为 false。
+默认情况下，`tyme4ts` 将农历的 `冬月` 和 `腊月` 表述为 `十一月` 和 `十二月`。如果希望遵循传统命名，可以设置插件配置 `traditional` 为 `true`（默认值）。
+若需显示 `tyme4ts` 的原始表述，可将 `traditional` 设置为 `false`。
 
 ```ts
 dayjs.extend(PluginLunar, { traditional: false });
@@ -55,3 +59,7 @@ dayjs('2024-12-19 12:00:00').toLunarMonth().getName(); // 十一月
 ## API 参考
 
 [types.ts](./src/types.ts)
+
+## License
+
+MIT

@@ -2,7 +2,6 @@
   "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@iringo/modkit", "@iringo/modkit*"]],
   "linked": [],
   "access": "restricted",
   "baseBranch": "main",

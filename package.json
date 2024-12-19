@@ -36,5 +36,11 @@
     "typescript": "^5.6.3",
     "vitest": "^2.1.8"
   },
+  "license": "MIT",
+  "keywords": ["dayjs", "plugin", "lunar", "农历", "阴历"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baranwang/dayjs-plugin-lunar"
+  },
   "packageManager": "pnpm@9.13.0"
 }
