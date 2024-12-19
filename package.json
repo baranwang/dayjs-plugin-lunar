@@ -19,7 +19,8 @@
     "dev": "rslib build --watch",
     "format": "biome format --write",
     "test": "vitest run",
-    "change": "changeset"
+    "change": "changeset",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "dayjs": "^1.0.0",
