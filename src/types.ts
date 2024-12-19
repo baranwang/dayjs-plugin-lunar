@@ -1,5 +1,7 @@
 import 'dayjs';
 
+export type LunarUnit = 'dual-hour' | 'day' | 'month' | 'year';
+
 declare module 'dayjs' {
   export function lunar(
     /** 农历年 */
@@ -51,5 +53,9 @@ declare module 'dayjs' {
      * 转换为农历的年份，返回 LunarYear 类型
      */
     toLunarYear(): import('tyme4ts').LunarYear;
+
+    addLunar(value: number, unit: LunarUnit): import('dayjs').Dayjs;
+
+    subtractLunar(value: number, unit: LunarUnit): import('dayjs').Dayjs;
   }
 }

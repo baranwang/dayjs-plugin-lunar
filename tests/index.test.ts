@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { beforeAll, describe, expect, test } from 'vitest';
-import { PluginLunar } from '../src/index';
+import { type LunarUnit, PluginLunar } from '../src/index';
 
 describe('dayjs-plugin-lunar', () => {
   const day = dayjs('1993-05-01 12:40:00');
@@ -41,8 +41,14 @@ describe('dayjs-plugin-lunar', () => {
   });
 
   test('lunar', () => {
-    expect(dayjs.lunar(1993, -3, 10, 12, 40).toDate().getTime()).toBe(
-      day.toDate().getTime(),
-    );
+    expect(dayjs.lunar(1993, -3, 10, 12, 40).toDate().getTime()).toBe(day.toDate().getTime());
+  });
+
+  test('addLunar', () => {
+    expect(day.addLunar(1, 'dual-hour').toLunarHour().getName()).toBe('未时');
+    expect(day.addLunar(1, 'day').toLunarDay().getName()).toBe('十一');
+    expect(day.addLunar(-1, 'month').toLunarMonth().getName()).toBe('三月');
+    expect(day.addLunar(1, 'year').toLunarYear().getYear()).toBe(1994);
+    expect(() => day.addLunar(1, 'foo' as LunarUnit)).toThrowError('Invalid lunar unit: foo');
   });
 });
