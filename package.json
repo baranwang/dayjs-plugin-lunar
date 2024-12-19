@@ -1,6 +1,6 @@
 {
   "name": "dayjs-plugin-lunar",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "exports": {
     ".": {
@@ -12,7 +12,10 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "build": "rslib build",
     "check": "biome check --write",
@@ -37,7 +40,13 @@
     "vitest": "^2.1.8"
   },
   "license": "MIT",
-  "keywords": ["dayjs", "plugin", "lunar", "农历", "阴历"],
+  "keywords": [
+    "dayjs",
+    "plugin",
+    "lunar",
+    "农历",
+    "阴历"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/baranwang/dayjs-plugin-lunar"
