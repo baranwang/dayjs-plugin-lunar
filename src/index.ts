@@ -1,27 +1,27 @@
-import type { PluginFunc } from "dayjs";
-import { LunarHour, SolarTime, LunarMonth } from "tyme4ts";
-import { transformToNumber, verifyLunar } from "./utils";
+import type { PluginFunc } from 'dayjs';
+import { LunarHour, LunarMonth, SolarTime } from 'tyme4ts';
+import { transformToNumber, verifyLunar } from './utils';
 
-export * from "./types";
+export * from './types';
 
 export const PluginLunar: PluginFunc<{
   traditional?: boolean;
-// biome-ignore lint/style/useDefaultParameterLast: This is a plugin function, so the order of parameters is not important
+  // biome-ignore lint/style/useDefaultParameterLast: This is a plugin function, so the order of parameters is not important
 }> = ({ traditional = true } = {}, dayjsClass, dayjsFactory) => {
   if (traditional) {
     LunarMonth.NAMES = [
-      "正月",
-      "二月",
-      "三月",
-      "四月",
-      "五月",
-      "六月",
-      "七月",
-      "八月",
-      "九月",
-      "十月",
-      "冬月",
-      "腊月",
+      '正月',
+      '二月',
+      '三月',
+      '四月',
+      '五月',
+      '六月',
+      '七月',
+      '八月',
+      '九月',
+      '十月',
+      '冬月',
+      '腊月',
     ];
   }
 
