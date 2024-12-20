@@ -58,10 +58,10 @@ export const verifyLunar = (
   }
 };
 
-export const tymeToDate = (tyme: SolarTime | SolarDay | SolarMonth | SolarYear, dayjsInterface?: Dayjs) => {
+export const tymeToDate = (tyme: SolarTime | SolarDay, dayjsInterface?: Dayjs) => {
   const year = tyme.getYear();
-  const monthIndex = 'getMonth' in tyme ? tyme.getMonth() - 1 : (dayjsInterface?.month() ?? 0);
-  const date = 'getDay' in tyme ? tyme.getDay() : (dayjsInterface?.date() ?? 1);
+  const monthIndex = tyme.getMonth();
+  const date = tyme.getDay();
   const hour = 'getHour' in tyme ? tyme.getHour() : (dayjsInterface?.hour() ?? 0);
   const minute = 'getMinute' in tyme ? tyme.getMinute() : (dayjsInterface?.minute() ?? 0);
   const second = 'getSecond' in tyme ? tyme.getSecond() : (dayjsInterface?.second() ?? 0);
