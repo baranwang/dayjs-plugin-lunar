@@ -1,5 +1,11 @@
 # dayjs-plugin-lunar
 
+## 1.2.1
+
+### Patch Changes
+
+- 2be5ec5: 代码细节优化
+
 ## 1.2.0
 
 ### Minor Changes
