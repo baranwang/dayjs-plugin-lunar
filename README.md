@@ -44,6 +44,9 @@ dayjs('2024-12-19 12:00:00').toLunarMonth().getName(); // 冬月
 dayjs.lunar(2025, 1, 1).format('YYYY-MM-DD') // 2025-01-29
 ```
 
+更多用法参看[测试用例](./tests/index.test.ts)
+
+
 ### 自定义配置
 
 默认情况下，`tyme4ts` 将农历的 `冬月` 和 `腊月` 表述为 `十一月` 和 `十二月`。如果希望遵循传统命名，可以设置插件配置 `traditional` 为 `true`（默认值）。

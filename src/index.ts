@@ -1,5 +1,14 @@
 import type { PluginFunc } from 'dayjs';
-import { LunarDay, LunarHour, LunarMonth, type SolarDay, type SolarMonth, SolarTime, type SolarYear } from 'tyme4ts';
+import {
+  EarthBranch,
+  LunarDay,
+  LunarHour,
+  LunarMonth,
+  type SolarDay,
+  type SolarMonth,
+  SolarTime,
+  type SolarYear,
+} from 'tyme4ts';
 import { transformToNumber, tymeToDate, verifyLunar } from './utils';
 
 export * from './types';
@@ -80,6 +89,34 @@ export const PluginLunar: PluginFunc<{
 
   dayjsClass.prototype.subtractLunar = function (value, unit) {
     return this.addLunar(-value, unit);
+  };
+
+  const originalFormat = dayjsClass.prototype.format;
+
+  dayjsClass.prototype.format = function (formatString) {
+    if (!this.isValid()) {
+      return originalFormat.bind(this)(formatString);
+    }
+
+    const result = formatString?.replace(/\[([^\]]+)]|LY|LM|LD|Lh|LH|LK/g, (match) => {
+      switch (match) {
+        case 'LY':
+          return this.toLunarYear().getSixtyCycle().getName();
+        case 'LM':
+          return this.toLunarMonth().getName();
+        case 'LD':
+          return this.toLunarDay().getName();
+        case 'LH':
+          return this.toLunarHour().getName();
+        case 'Lh':
+          return EarthBranch.fromIndex(this.toLunarHour().getIndexInDay()).getName();
+        case 'LK':
+          return `${this.hour() % 2 ? '初' : '正'}${['初', '一', '二', '三'][Math.floor(this.minute() / 15)]}刻`;
+        default:
+          return match;
+      }
+    });
+    return originalFormat.bind(this)(result);
   };
 
   dayjsFactory.lunar = (...args) => {

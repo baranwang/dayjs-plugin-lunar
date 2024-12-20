@@ -51,4 +51,13 @@ describe('dayjs-plugin-lunar', () => {
     expect(day.addLunar(1, 'year').toLunarYear().getYear()).toBe(1994);
     expect(() => day.addLunar(1, 'foo' as LunarUnit)).toThrowError('Invalid lunar unit: foo');
   });
+
+  test('format', () => {
+    expect(day.format('LY')).toBe('癸酉');
+    expect(day.format('LM')).toBe('闰三月');
+    expect(day.format('LD')).toBe('初十');
+    expect(day.format('LH')).toBe('午时');
+    expect(day.format('Lh')).toBe('午');
+    expect(day.format('LK')).toBe('正二刻');
+  });
 });
