@@ -1,5 +1,11 @@
 # dayjs-plugin-lunar
 
+## 1.2.0
+
+### Minor Changes
+
+- df27593: 扩展 format 能力，支持 `LY` / `LM` / `LD` / `LH` / `Lh` / `LK`
+
 ## 1.1.0
 
 ### Minor Changes
