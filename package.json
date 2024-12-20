@@ -12,11 +12,9 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "CHANGELOG.md"
-  ],
+  "files": ["dist", "CHANGELOG.md"],
   "scripts": {
+    "prepare": "husky",
     "build": "rslib build",
     "check": "biome check --write",
     "dev": "rslib build --watch",
@@ -35,18 +33,14 @@
     "@rslib/core": "0.1.5",
     "@types/node": "^22.8.1",
     "dayjs": "^1.11.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
     "tyme4ts": "^1.1.8",
     "typescript": "^5.6.3",
     "vitest": "^2.1.8"
   },
   "license": "MIT",
-  "keywords": [
-    "dayjs",
-    "plugin",
-    "lunar",
-    "农历",
-    "阴历"
-  ],
+  "keywords": ["dayjs", "plugin", "lunar", "农历", "阴历"],
   "repository": {
     "type": "git",
     "url": "https://github.com/baranwang/dayjs-plugin-lunar"
