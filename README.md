@@ -31,6 +31,8 @@ import { PluginLunar } from 'dayjs-plugin-lunar';
 // 注册插件
 dayjs.extend(PluginLunar);
 
+dayjs('2024-12-19 12:00:00').format('LMLDLhLK') // 冬月十九午正初刻
+
 // 转换为农历时辰
 dayjs('2024-12-19 12:00:00').toLunarHour().getName(); // 午时
 
