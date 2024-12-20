@@ -60,7 +60,7 @@ export const verifyLunar = (
 
 export const tymeToDate = (tyme: SolarTime | SolarDay, dayjsInterface?: Dayjs) => {
   const year = tyme.getYear();
-  const monthIndex = tyme.getMonth();
+  const monthIndex = tyme.getMonth() - 1;
   const date = tyme.getDay();
   const hour = 'getHour' in tyme ? tyme.getHour() : (dayjsInterface?.hour() ?? 0);
   const minute = 'getMinute' in tyme ? tyme.getMinute() : (dayjsInterface?.minute() ?? 0);
