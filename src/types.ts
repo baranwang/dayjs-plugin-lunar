@@ -1,4 +1,3 @@
-import type { Dayjs } from 'dayjs';
 import type { LunarDay, LunarHour, LunarMonth, LunarSeason, LunarYear } from 'tyme4ts';
 
 export type LunarUnit = 'dual-hour' | 'day' | 'month' | 'year';
@@ -22,7 +21,7 @@ declare module 'dayjs' {
     lunarHour?: number,
     lunarMinute?: number,
     lunarSecond?: number,
-  ): Dayjs;
+  ): import('dayjs').Dayjs;
 
   export interface Dayjs {
     /**
@@ -67,7 +66,7 @@ declare module 'dayjs' {
      * @returns {Dayjs}
      * @example dayjs('2024-12-20 12:00:00').addLunar(1, 'dual-hour').toLunarHour().getName(); // 未时
      */
-    addLunar(value: number, unit: LunarUnit): Dayjs;
+    addLunar(value: number, unit: LunarUnit): import('dayjs').Dayjs;
 
     /**
      * 减去农历时间，与 addLunar 相反
@@ -76,6 +75,6 @@ declare module 'dayjs' {
      * @returns {Dayjs}
      * @example dayjs('2024-12-20 12:00:00').subtractLunar(1, 'dual-hour').toLunarHour().getName(); // 巳时
      */
-    subtractLunar(value: number, unit: LunarUnit): Dayjs;
+    subtractLunar(value: number, unit: LunarUnit): import('dayjs').Dayjs;
   }
 }
