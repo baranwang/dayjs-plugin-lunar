@@ -1,5 +1,11 @@
 # dayjs-plugin-lunar
 
+## 1.3.0
+
+### Minor Changes
+
+- 6f8f9af: 拓展 add / subtract 方法，支持农历单位的加减
+
 ## 1.2.2
 
 ### Patch Changes
