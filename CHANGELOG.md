@@ -1,5 +1,11 @@
 # dayjs-plugin-lunar
 
+## 1.2.2
+
+### Patch Changes
+
+- 3e25301: 修正 Dayjs 类型导入以确保类型一致性
+
 ## 1.2.1
 
 ### Patch Changes
