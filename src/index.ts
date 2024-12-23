@@ -1,6 +1,6 @@
 import type { PluginFunc } from 'dayjs';
 import { EarthBranch, LunarDay, LunarHour, LunarMonth, type SolarDay, SolarTime } from 'tyme4ts';
-import { transformToNumber, tymeToDate, verifyLunar } from './utils';
+import { clearLunarUnitPrefix, transformToNumber, tymeToDate, verifyLunar } from './utils';
 
 export * from './types';
 
@@ -80,6 +80,22 @@ export const PluginLunar: PluginFunc<{
 
   dayjsClass.prototype.subtractLunar = function (value, unit) {
     return this.addLunar(-value, unit);
+  };
+
+  const originalAdd = dayjsClass.prototype.add;
+  dayjsClass.prototype.add = function (value, unit) {
+    if (unit?.startsWith('lunar-')) {
+      return this.addLunar(value, clearLunarUnitPrefix(unit));
+    }
+    return originalAdd.bind(this)(value, unit);
+  };
+
+  const originalSubtract = dayjsClass.prototype.subtract;
+  dayjsClass.prototype.subtract = function (value, unit) {
+    if (unit?.startsWith('lunar-')) {
+      return this.subtractLunar(value, clearLunarUnitPrefix(unit));
+    }
+    return originalSubtract.bind(this)(value, unit);
   };
 
   const originalFormat = dayjsClass.prototype.format;

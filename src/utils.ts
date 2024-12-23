@@ -1,5 +1,6 @@
 import type { Dayjs } from 'dayjs';
 import type { SolarDay, SolarMonth, SolarTime, SolarYear } from 'tyme4ts';
+import type { LunarUnit } from './types';
 
 export const isNil = (value: unknown): value is null | undefined => value === null || value === undefined;
 
@@ -69,3 +70,5 @@ export const tymeToDate = (tyme: SolarTime | SolarDay, dayjsInterface?: Dayjs) =
 
   return new Date(year, monthIndex, date, hour, minute, second, millisecond);
 };
+
+export const clearLunarUnitPrefix = (unit: string) => unit.replace(/^lunar-/, '') as LunarUnit;

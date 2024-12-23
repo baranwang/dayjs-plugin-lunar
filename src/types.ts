@@ -26,35 +26,35 @@ declare module 'dayjs' {
   export interface Dayjs {
     /**
      * 转换为农历的时辰
-     * @returns {LunarHour}
+     * @returns {LunarHour} `tyme4ts` 中的 `LunarHour` 类
      * @example dayjs('2024-12-19 12:00:00').toLunarHour().getName(); // 午时
      */
     toLunarHour(): LunarHour;
 
     /**
      * 转换为农历的日期
-     * @returns {LunarDay}
+     * @returns {LunarDay} `tyme4ts` 中的 `LunarDay` 类
      * @example dayjs('2025-01-29').toLunarDay().getName(); // 初一
      */
     toLunarDay(): LunarDay;
 
     /**
      * 转换为农历的月份
-     * @returns {LunarMonth}
+     * @returns {LunarMonth} `tyme4ts` 中的 `LunarMonth` 类
      * @example dayjs('2025-01-29').toLunarMonth().getName(); // 正月
      */
     toLunarMonth(): LunarMonth;
 
     /**
      * 转换为农历的季节
-     * @returns {LunarSeason}
+     * @returns {LunarSeason} `tyme4ts` 中的 `LunarSeason` 类
      * @example dayjs('2025-01-29').toLunarSeason().getName(); // 孟春
      */
     toLunarSeason(): LunarSeason;
 
     /**
      * 转换为农历的年份
-     * @returns {LunarYear}
+     * @returns {LunarYear} `tyme4ts` 中的 `LunarYear` 类
      * @example dayjs('2025-01-01').toLunarYear().getYear(); // 2024
      */
     toLunarYear(): LunarYear;
@@ -76,5 +76,9 @@ declare module 'dayjs' {
      * @example dayjs('2024-12-20 12:00:00').subtractLunar(1, 'dual-hour').toLunarHour().getName(); // 巳时
      */
     subtractLunar(value: number, unit: LunarUnit): import('dayjs').Dayjs;
+
+    add(value: number, unit?: import('dayjs').ManipulateType | `lunar-${LunarUnit}`): import('dayjs').Dayjs;
+
+    subtract(value: number, unit?: import('dayjs').ManipulateType | `lunar-${LunarUnit}`): import('dayjs').Dayjs;
   }
 }
