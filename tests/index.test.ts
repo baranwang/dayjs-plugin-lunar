@@ -54,6 +54,7 @@ describe('dayjs-plugin-lunar', () => {
 
   test('format', () => {
     expect(day.format('LY')).toBe('癸酉');
+    expect(day.format('LZ')).toBe('鸡');
     expect(day.format('LM')).toBe('闰三月');
     expect(day.format('LD')).toBe('初十');
     expect(day.format('LH')).toBe('午时');

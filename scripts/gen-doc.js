@@ -26,7 +26,19 @@ import { build, formats } from 'documentation';
   // 格式化文档内容，增加层级标记
   const formattedDocs = typeDocsMarkdown
     .split('\n')
-    .map((line) => (line.startsWith('#') ? `#${line}` : line))
+    .map((line) => {
+      let modifiedLine = line;
+      if (modifiedLine.includes('Examples')) {
+        modifiedLine = modifiedLine.replace('Examples', '示例');
+      }
+      if (modifiedLine.includes('Parameters')) {
+        modifiedLine = modifiedLine.replace('Parameters', '参数');
+      }
+      if (modifiedLine.startsWith('#')) {
+        return `#${modifiedLine}`;
+      }
+      return modifiedLine;
+    })
     .join('\n');
 
   // 构建新的 README 内容

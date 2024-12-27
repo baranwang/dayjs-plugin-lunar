@@ -105,10 +105,12 @@ export const PluginLunar: PluginFunc<{
       return originalFormat.bind(this)(formatString);
     }
 
-    const result = formatString?.replace(/\[([^\]]+)]|LY|LM|LD|Lh|LH|LK/g, (match) => {
+    const result = formatString?.replace(/\[([^\]]+)]|LY|LZ|LM|LD|Lh|LH|LK/g, (match) => {
       switch (match) {
         case 'LY':
           return this.toLunarYear().getSixtyCycle().getName();
+        case 'LZ':
+          return this.toLunarYear().getSixtyCycle().getEarthBranch().getZodiac().getName();
         case 'LM':
           return this.toLunarMonth().getName();
         case 'LD':
