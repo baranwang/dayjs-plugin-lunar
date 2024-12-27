@@ -1,5 +1,11 @@
 # dayjs-plugin-lunar
 
+## 1.4.0
+
+### Minor Changes
+
+- b4675e0: format 增加农历生肖支持
+
 ## 1.3.0
 
 ### Minor Changes
