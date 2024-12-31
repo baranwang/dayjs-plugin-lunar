@@ -5,7 +5,7 @@ export type LunarUnit = 'dual-hour' | 'day' | 'month' | 'year';
 declare module 'dayjs' {
   /**
    * 使用农历时间创建 Dayjs 对象
-   * @param lunarYear 农历年
+   * @param lunarYear 该农历年大部分日期所在的公历年，支持 -1 至 9999 年
    * @param lunarMonth 农历月，1 到 12，闰月为负数
    * @param lunarDay 农历日，1 到 30
    * @param lunarHour 时，0 到 23

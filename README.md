@@ -109,7 +109,7 @@ dayjs("2024-12-20 12:20:00")
 
 #### 参数
 
-*   `lunarYear` **[number][1]** 农历年
+*   `lunarYear` **[number][1]** 该农历年大部分日期所在的公历年，支持 -1 至 9999 年
 *   `lunarMonth` **[number][1]?** 农历月，1 到 12，闰月为负数
 *   `lunarDay` **[number][1]?** 农历日，1 到 30
 *   `lunarHour` **[number][1]?** 时，0 到 23
