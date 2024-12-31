@@ -1,5 +1,11 @@
 # dayjs-plugin-lunar
 
+## 1.4.1
+
+### Patch Changes
+
+- 3640538: 更新注释
+
 ## 1.4.0
 
 ### Minor Changes
