@@ -1,8 +1,28 @@
 import type { PluginFunc } from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import { EarthBranch, LunarDay, LunarHour, LunarMonth, type SolarDay, SolarTime } from 'tyme4ts';
 import { clearLunarUnitPrefix, transformToNumber, tymeToDate, verifyLunar } from './utils';
 
 export * from './types';
+
+// 预定义格式化模式映射，避免在format方法中重复判断
+type FormatTokens = {
+  [key: string]: (instance: Dayjs) => string;
+};
+
+const FORMAT_TOKENS: FormatTokens = {
+  LY: (instance: Dayjs) => instance.toLunarYear().getSixtyCycle().getName(),
+  LZ: (instance: Dayjs) => instance.toLunarYear().getSixtyCycle().getEarthBranch().getZodiac().getName(),
+  LM: (instance: Dayjs) => instance.toLunarMonth().getName(),
+  LD: (instance: Dayjs) => instance.toLunarDay().getName(),
+  LH: (instance: Dayjs) => instance.toLunarHour().getName(),
+  Lh: (instance: Dayjs) => EarthBranch.fromIndex(instance.toLunarHour().getIndexInDay()).getName(),
+  LK: (instance: Dayjs) => {
+    const hour = instance.hour();
+    const minute = instance.minute();
+    return `${hour % 2 ? '初' : '正'}${['初', '一', '二', '三'][Math.floor(minute / 15)]}刻`;
+  },
+};
 
 export const PluginLunar: PluginFunc<{
   traditional?: boolean;
@@ -22,6 +42,7 @@ export const PluginLunar: PluginFunc<{
       this.second(),
     ).getLunarHour();
   };
+
   dayjsClass.prototype.toLunarDay = function () {
     return this.toLunarHour().getLunarDay();
   };
@@ -36,8 +57,14 @@ export const PluginLunar: PluginFunc<{
   };
 
   dayjsClass.prototype.addLunar = function (value, unit) {
+    // 如果值为0，直接返回当前实例，避免不必要的计算
+    if (value === 0) {
+      return this;
+    }
+
     const lunarDay = this.toLunarDay();
     let newSolarDay: SolarDay;
+
     switch (unit) {
       case 'dual-hour':
         return dayjsFactory(tymeToDate(this.toLunarHour().next(value).getSolarTime(), this));
@@ -99,32 +126,20 @@ export const PluginLunar: PluginFunc<{
   };
 
   const originalFormat = dayjsClass.prototype.format;
-
   dayjsClass.prototype.format = function (formatString) {
-    if (!this.isValid()) {
+    if (!this.isValid() || !formatString) {
       return originalFormat.bind(this)(formatString);
     }
 
-    const result = formatString?.replace(/\[([^\]]+)]|LY|LZ|LM|LD|Lh|LH|LK/g, (match) => {
-      switch (match) {
-        case 'LY':
-          return this.toLunarYear().getSixtyCycle().getName();
-        case 'LZ':
-          return this.toLunarYear().getSixtyCycle().getEarthBranch().getZodiac().getName();
-        case 'LM':
-          return this.toLunarMonth().getName();
-        case 'LD':
-          return this.toLunarDay().getName();
-        case 'LH':
-          return this.toLunarHour().getName();
-        case 'Lh':
-          return EarthBranch.fromIndex(this.toLunarHour().getIndexInDay()).getName();
-        case 'LK':
-          return `${this.hour() % 2 ? '初' : '正'}${['初', '一', '二', '三'][Math.floor(this.minute() / 15)]}刻`;
-        default:
-          return match;
+    // 使用正则表达式一次性匹配所有需要替换的标记
+    const result = formatString.replace(/\[([^\]]+)]|LY|LZ|LM|LD|Lh|LH|LK/g, (match) => {
+      // 对于转义的内容，直接返回
+      if (match.startsWith('[')) {
+        return match;
       }
+      return FORMAT_TOKENS[match]?.(this) ?? match;
     });
+
     return originalFormat.bind(this)(result);
   };
 
@@ -132,12 +147,11 @@ export const PluginLunar: PluginFunc<{
     if (!args.length) {
       return dayjsFactory();
     }
-    const [year = 0, month = 1, day = 1, hour = 0, minute = 0, second = 0] = args.map(transformToNumber);
 
+    const [year = 0, month = 1, day = 1, hour = 0, minute = 0, second = 0] = args.map(transformToNumber);
     verifyLunar(year, month, day, hour, minute, second);
 
     const lunarHour = LunarHour.fromYmdHms(year, month, day, hour, minute, second);
-
     return dayjsFactory(tymeToDate(lunarHour.getSolarTime()));
   };
 };
