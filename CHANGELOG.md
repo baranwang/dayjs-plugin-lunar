@@ -1,5 +1,12 @@
 # dayjs-plugin-lunar
 
+## 1.4.1
+
+### Patch Changes
+
+- 3640538: 更新注释
+- fba14b1: 优化农历格式化和验证逻辑，增加格式化标记映射，改进参数验证
+
 ## 1.4.0
 
 ### Minor Changes
